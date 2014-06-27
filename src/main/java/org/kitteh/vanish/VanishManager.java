@@ -259,24 +259,7 @@ public final class VanishManager {
             MetricsOverlord.getUnvanishTracker().increment();
             this.plugin.getLogger().info(vanishingPlayerName + " reappeared.");
         }
-        if (effects) {
-            final Location oneUp = vanishingPlayer.getLocation().add(0, 1, 0);
-            if (VanishPerms.canEffectSmoke(vanishingPlayer)) {
-                this.effectSmoke(vanishingPlayer.getLocation());
-            }
-            if (VanishPerms.canEffectExplode(vanishingPlayer)) {
-                this.effectExplosion(vanishingPlayer);
-            }
-            if (VanishPerms.canEffectLightning(vanishingPlayer)) {
-                this.effectLightning(vanishingPlayer.getLocation());
-            }
-            if (VanishPerms.canEffectFlames(vanishingPlayer)) {
-                this.effectFlames(oneUp);
-            }
-            if (VanishPerms.canEffectBats(vanishingPlayer)) {
-                this.effectBats(oneUp);
-            }
-        }
+
         this.plugin.getServer().getPluginManager().callEvent(new VanishStatusChangeEvent(vanishingPlayer, vanishing));
         vanishingPlayer.sendPluginMessage(this.plugin, "vanishStatus", vanishing ? new byte[] { 0x01 } : new byte[] { 0x00 });
         final Player[] playerList = this.plugin.getServer().getOnlinePlayers();
@@ -399,12 +382,6 @@ public final class VanishManager {
             }
             final Location toStrike = new Location(location.getWorld(), xToStrike, y, zToStrike);
             location.getWorld().strikeLightningEffect(toStrike);
-        }
-    }
-
-    private void effectSmoke(Location location) {
-        for (int i = 0; i < 10; i++) {
-            location.getWorld().playEffect(location, Effect.SMOKE, this.random.nextInt(9));
         }
     }
 
