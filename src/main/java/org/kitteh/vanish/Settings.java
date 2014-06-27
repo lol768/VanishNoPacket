@@ -58,9 +58,7 @@ public final class Settings {
                 config.set("updates.check", null);
                 config.set("checkupdates", updates);
             }
-            if ((ver <= 3)) {
-                config.set("effects.lightning.count", 30);
-            }
+
             if ((ver <= 4)) {
                 config.set("colornametags", true);
             }
@@ -72,7 +70,6 @@ public final class Settings {
         Settings.fakeQuit = config.getString("fakeannounce.quit", "%p left the game.").replace("&&", String.valueOf(ChatColor.COLOR_CHAR));
         Settings.autoFakeJoinSilent = config.getBoolean("fakeannounce.automaticforsilentjoin", false);
         Settings.worldChangeCheck = config.getBoolean("permissionsupdates.checkonworldchange", false);
-        Settings.lightningEffectCount = config.getInt("effects.lightning.count", 30);
         if (Settings.lightningEffectCount < 1) {
             Settings.lightningEffectCount = 1;
         }

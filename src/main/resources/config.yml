@@ -18,9 +18,6 @@ hooks:
 checkupdates: true
 permissionsupdates:
     checkonworldchange: false
-effects:
-    lightning:
-        count: 30
 colornametags: true
 
 permtest: false

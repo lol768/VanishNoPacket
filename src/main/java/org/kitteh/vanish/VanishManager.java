@@ -189,8 +189,6 @@ public final class VanishManager {
      * Toggles a player's visibility
      * Called when a player calls /vanish
      * Talks to the player and everyone with vanish.see
-     * Will trigger effects
-     *
      * @param togglingPlayer the player disappearing
      */
     public void toggleVanish(Player togglingPlayer) {
@@ -217,23 +215,10 @@ public final class VanishManager {
     /**
      * Toggles a player's visibility
      * Does not say anything.
-     * Will trigger effects
-     * Called by toggleVanish(Player)
      *
      * @param vanishingPlayer
      */
     public void toggleVanishQuiet(Player vanishingPlayer) {
-        this.toggleVanishQuiet(vanishingPlayer, true);
-    }
-
-    /**
-     * Toggles a player's visibility
-     * Does not say anything.
-     *
-     * @param vanishingPlayer
-     * @param effects if true, trigger effects
-     */
-    public void toggleVanishQuiet(Player vanishingPlayer, boolean effects) {
         final boolean vanishing = !this.isVanished(vanishingPlayer);
         final String vanishingPlayerName = vanishingPlayer.getName();
         if (vanishing) {
@@ -296,14 +281,13 @@ public final class VanishManager {
      *
      * @param vanishingPlayer player to hide
      * @param silent if true, does not say anything
-     * @param effects if true, trigger effects
      */
-    public void vanish(Player vanishingPlayer, boolean silent, boolean effects) {
+    public void vanish(Player vanishingPlayer, boolean silent) {
         if (this.isVanished(vanishingPlayer)) {
             return;
         }
         if (silent) {
-            this.toggleVanishQuiet(vanishingPlayer, effects);
+            this.toggleVanishQuiet(vanishingPlayer);
         } else {
             this.toggleVanish(vanishingPlayer);
         }
@@ -315,14 +299,13 @@ public final class VanishManager {
      *
      * @param revealingPlayer player to reveal
      * @param silent if true, does not say anything
-     * @param effects if true, trigger effects
      */
-    public void reveal(Player revealingPlayer, boolean silent, boolean effects) {
+    public void reveal(Player revealingPlayer, boolean silent) {
         if (!this.isVanished(revealingPlayer)) {
            return;
         }
         if (silent) {
-           this.toggleVanishQuiet(revealingPlayer, effects);
+           this.toggleVanishQuiet(revealingPlayer);
         } else {
            this.toggleVanish(revealingPlayer);
         }

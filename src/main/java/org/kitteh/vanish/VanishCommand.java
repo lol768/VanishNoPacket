@@ -144,38 +144,6 @@ public final class VanishCommand implements CommandExecutor {
             return true;
         }
 
-        if (goal.equalsIgnoreCase("effects") || goal.equalsIgnoreCase("e")) {
-            // List my toggles
-            if (args.length == 1) {
-                final StringBuilder toggleReply = new StringBuilder();
-                if (VanishPerms.canToggleSmoke(player)) {
-                    toggleReply.append(this.colorize(VanishPerms.canEffectSmoke(player)) + "smoke" + ChatColor.DARK_AQUA);
-                }
-                if (VanishPerms.canToggleEffectExplode(player)) {
-                    this.appendList(toggleReply, this.colorize(VanishPerms.canEffectExplode(player)) + "explode" + ChatColor.DARK_AQUA);
-                }
-                if (VanishPerms.canToggleEffectLightning(player)) {
-                    this.appendList(toggleReply, this.colorize(VanishPerms.canEffectLightning(player)) + "lightning" + ChatColor.DARK_AQUA);
-                }
-                if (VanishPerms.canToggleEffectFlames(player)) {
-                    this.appendList(toggleReply, this.colorize(VanishPerms.canEffectFlames(player)) + "flames" + ChatColor.DARK_AQUA);
-                }
-                if (VanishPerms.canToggleEffectBats(player)) {
-                    this.appendList(toggleReply, this.colorize(VanishPerms.canEffectBats(player)) + "bats" + ChatColor.DARK_AQUA);
-                }
-                if (toggleReply.length() > 0) {
-                    toggleReply.insert(0, ChatColor.DARK_AQUA + "You can toggle: ");
-                } else {
-                    toggleReply.append(ChatColor.DARK_AQUA + "You cannot toggle any effects");
-                }
-                player.sendMessage(toggleReply.toString());
-            } else {
-                // I wish to toggle something
-                this.toggle(player, args[1]);
-            }
-            return true;
-        }
-
         // The non-toggles
         if (goal.equalsIgnoreCase("on")) {
             if (!VanishPerms.canVanishOn(player)) {
@@ -311,22 +279,8 @@ public final class VanishCommand implements CommandExecutor {
         } else if (toggle.equalsIgnoreCase("chests") && VanishPerms.canToggleSilentChestReads(player)) {
             status = VanishPerms.toggleSilentChestReads(player);
             message.append("silent chest reads");
-        } else if (toggle.equalsIgnoreCase("smoke") && VanishPerms.canToggleSmoke(player)) {
-            status = VanishPerms.toggleEffectSmoke(player);
-            message.append("smoke effect");
-        } else if (toggle.equalsIgnoreCase("explode") && VanishPerms.canToggleEffectExplode(player)) {
-            status = VanishPerms.toggleEffectExplode(player);
-            message.append("explosion effect");
-        } else if (toggle.equalsIgnoreCase("lightning") && VanishPerms.canToggleEffectLightning(player)) {
-            status = VanishPerms.toggleEffectLightning(player);
-            message.append("lightning effect");
-        } else if (toggle.equalsIgnoreCase("flames") && VanishPerms.canToggleEffectFlames(player)) {
-            status = VanishPerms.toggleEffectFlames(player);
-            message.append("flames effect");
-        } else if (toggle.equalsIgnoreCase("bats") && VanishPerms.canToggleEffectBats(player)) {
-            status = VanishPerms.toggleEffectBats(player);
-            message.append("bats effect");
         }
+
         if (message.length() > 0) {
             message.insert(0, ChatColor.DARK_AQUA + "Status: ");
             message.append(": ");
